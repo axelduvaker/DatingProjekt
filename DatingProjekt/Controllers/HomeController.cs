@@ -26,5 +26,11 @@ namespace DatingProjekt.Controllers
 
             return View();
         }
+        public ActionResult Registrera()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
     }
 }
