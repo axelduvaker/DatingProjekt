@@ -1,0 +1,12 @@
+﻿@model  DatingProjekt.Models.AndViewModel
+@{
+    ViewBag.Title = "ListaAlla";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ListaAlla</h2>
+
+@foreach(var and in Model.Ands)
+{
+    <p>@and.Förnamn</p>
+}

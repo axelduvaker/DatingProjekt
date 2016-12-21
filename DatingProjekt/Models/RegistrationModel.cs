@@ -17,6 +17,10 @@ namespace DatingProjekt.Models
         public string Efternamn { get; set; }
 
         [Required]
+        [Display(Name = "Användarnamn")]
+        public string Användarnamn { get; set; }
+
+        [Required]
         [Display(Name = "Kön")]
         public string Kön { get; set; }
 
@@ -34,5 +38,6 @@ namespace DatingProjekt.Models
         [Display(Name = "Bekräfta lösenord")]
         [Compare("Lösenord", ErrorMessage = "The password and confirmation password do not match.")]
         public string BekräftaLösenord { get; set; }
+        public string ErrorMessage { get; set; }
     }
 }

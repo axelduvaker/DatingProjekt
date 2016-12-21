@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DataBasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DataBasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
 warning 6013: The table/view 'C:\USERS\JOAKI\ONEDRIVE\DOKUMENT\GITHUB\DATINGPROJEKT\DATINGPROJEKT\APP_DATA\DATABAS.MDF.dbo.Städer' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="Städer">
@@ -21,12 +21,12 @@ warning 6013: The table/view 'C:\USERS\JOAKI\ONEDRIVE\DOKUMENT\GITHUB\DATINGPROJ
           <Property Name="Kön" Type="varchar" MaxLength="10" />
           <Property Name="Ålder" Type="nvarchar" MaxLength="50" />
           <Property Name="Lösenord" Type="varchar" MaxLength="20" />
+          <Property Name="Användarnamn" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="DataBasModelStoreContainer">
           <EntitySet Name="Änder" EntityType="Self.Änder" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DataBasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -40,6 +40,7 @@ warning 6013: The table/view 'C:\USERS\JOAKI\ONEDRIVE\DOKUMENT\GITHUB\DATINGPROJ
           <Property Name="Kön" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Ålder" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Lösenord" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Användarnamn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="DataBasEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Änder" EntityType="Self.Änder" />
@@ -53,6 +54,7 @@ warning 6013: The table/view 'C:\USERS\JOAKI\ONEDRIVE\DOKUMENT\GITHUB\DATINGPROJ
           <EntitySetMapping Name="Änder">
             <EntityTypeMapping TypeName="DataBasModel.Änder">
               <MappingFragment StoreEntitySet="Änder">
+                <ScalarProperty Name="Användarnamn" ColumnName="Användarnamn" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Förnamn" ColumnName="Förnamn" />
                 <ScalarProperty Name="Efternamn" ColumnName="Efternamn" />

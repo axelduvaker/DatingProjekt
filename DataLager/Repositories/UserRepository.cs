@@ -20,10 +20,14 @@ namespace DataLager.Repositories
         Context.SaveChanges();
         }
 
-        public bool UserExists(string fornamn)
+        public bool UserExists(string användarnamn)
         {
-                return Context.Änder.Any(x => x.Förnamn == fornamn);
+                return Context.Änder.Any(x => x.Användarnamn == användarnamn);
             
+        }
+        public bool PassWordExists(string lösenord)
+        {
+            return Context.Änder.Any(x => x.Lösenord == lösenord);
         }
 
         public Änder Get(string förnamn)
@@ -34,7 +38,10 @@ namespace DataLager.Repositories
 
         public List<Änder> GetAll()
         {
+            //List<Änder> andLista = new List<Änder>();
+            //andLista.Add
                 return Context.Änder.ToList();
+                
         }
 
         public void AddAnd(Änder and)

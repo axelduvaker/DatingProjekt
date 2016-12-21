@@ -48,18 +48,18 @@ namespace DatingProjekt.Models
 
     public class LoginViewModel
     {
-        [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Required(ErrorMessage = "Användarnamn")]
+        [Display(Name = "Användarnamn")]
+        public string Användarnamn { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Lösenord")]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
+        [Display(Name = "Lösenord")]
+        public string Lösenord { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Kom ihåg mig")]
         public bool RememberMe { get; set; }
+        public string ErrorMessage { get; set; }
     }
 
     public class RegisterViewModel

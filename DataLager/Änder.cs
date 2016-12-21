@@ -20,5 +20,6 @@ namespace DataLager
         public string Kön { get; set; }
         public string Ålder { get; set; }
         public string Lösenord { get; set; }
+        public string Användarnamn { get; set; }
     }
 }

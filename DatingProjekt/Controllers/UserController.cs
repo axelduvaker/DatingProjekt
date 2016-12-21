@@ -36,5 +36,14 @@ namespace DatingProjekt.Controllers
         //        and.
         //    }
         //        }
+        public ActionResult listaAlla()
+        {
+            var hamtadeAnder = _userRepository.GetAll();
+            var model = new AndViewModel
+            {
+                Ands = _userRepository.GetAll()
+            };
+            return View(model);
+        }
     }
 }

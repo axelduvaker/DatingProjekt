@@ -1,0 +1,29 @@
+﻿@using DatingProjekt.Models
+@model LoginModel
+@{
+    ViewBag.Title = "Log in";
+}
+
+<h2>@ViewBag.Title.</h2>
+<h2>Login</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.LabelFor(x => x.Användarnamn, new { @style = "font-family:'Open sans'" })
+    @Html.TextBoxFor(x => x.Användarnamn, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Användarnamn)
+    <br />
+    @Html.LabelFor(x => x.Lösenord, new { @style = "font-family:'Open sans'" })
+    @Html.PasswordFor(x => x.Lösenord, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Lösenord)
+
+    if (Model.ErrorMessage != null)
+    {
+        <p>@Model.ErrorMessage</p>
+    }
+    <br />
+
+    <div class="col-md-3" id="knappLogin">
+        <input class="btn btn-info" type="submit" value="Login" />
+    </div>
+}
