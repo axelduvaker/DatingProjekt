@@ -16,17 +16,22 @@ namespace DatingProjekt.Controllers
             _userRepository = new UserRepository();
         }
 
-        // GET: Profile
-        //public ActionResult Index(LoginViewModel model)
-        //{
-        //    var user = _userRepository.Get(förnamn);
-        //    var and = new And
-        //    {
-        //        AndId = model.id,
-        //        Förnamn = model.Förnamn
-        //    };
-        //    return View(and);
-        //}
-        
+        //GET: Profile
+        public ActionResult Profile(LoginModel model)
+        {
+            var namn = User.Identity.Name;
+            var user = _userRepository.GetUser(namn);
+            if (user == null) return View();
+            var and = new And
+            {
+                AndId = user.id,
+                Förnamn = user.Förnamn,
+                Efternamn = user.Efternamn,
+                Kön = user.Kön,
+                Ålder = user.Ålder,
+                Profilbild = user.Profilbild
+            };
+            return View(and);
+        }
     }
 }

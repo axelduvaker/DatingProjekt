@@ -29,11 +29,23 @@ namespace DataLager.Repositories
         {
             return Context.Änder.Any(x => x.Lösenord == lösenord);
         }
+        public Änder LoginUser(string userName, string password)
+        {
+            var user = Context.Änder.FirstOrDefault(x => x.Förnamn.Equals(userName, StringComparison.OrdinalIgnoreCase) &&
+                                                        x.Lösenord.Equals(password, StringComparison.OrdinalIgnoreCase));
+
+            return user;
+        }
 
         public Änder Get(string förnamn)
         {
                 return Context.Änder.FirstOrDefault(x => x.Förnamn == förnamn);
-            
+        }
+
+        public Änder GetUser(string användarnamn)
+        {
+            return Context.Änder.FirstOrDefault(x => x.Användarnamn == användarnamn);
+
         }
 
         public List<Änder> GetAll()

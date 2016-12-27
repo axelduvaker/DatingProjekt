@@ -12,15 +12,9 @@ namespace DataLager
     using System;
     using System.Collections.Generic;
     
-    public partial class Änder
+    public partial class Städer
     {
-        public int id { get; set; }
-        public string Förnamn { get; set; }
-        public string Efternamn { get; set; }
-        public string Kön { get; set; }
-        public string Ålder { get; set; }
-        public string Lösenord { get; set; }
-        public string Användarnamn { get; set; }
-        public string Profilbild { get; set; }
+        public int Id { get; set; }
+        public string Namn { get; set; }
     }
 }

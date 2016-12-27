@@ -10,6 +10,7 @@ namespace DatingProjekt.Controllers
     public class PictureController : Controller
     {
         // GET: Picture
+        [HttpPost]
         public ActionResult UserPicture(HttpPostedFileBase file)
         {
             if (file != null && file.ContentLength > 0)

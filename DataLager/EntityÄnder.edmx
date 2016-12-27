@@ -5,12 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DataBasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'C:\USERS\JOAKI\ONEDRIVE\DOKUMENT\GITHUB\DATINGPROJEKT\DATINGPROJEKT\APP_DATA\DATABAS.MDF.dbo.Städer' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="Städer">
-          <Property Name="id" Type="int" />
-          <Property Name="Namn" Type="varchar" MaxLength="50" />
-        </EntityType>-->
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Namn" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Änder">
           <Key>
             <PropertyRef Name="id" />
@@ -22,8 +23,10 @@ warning 6013: The table/view 'C:\USERS\JOAKI\ONEDRIVE\DOKUMENT\GITHUB\DATINGPROJ
           <Property Name="Ålder" Type="nvarchar" MaxLength="50" />
           <Property Name="Lösenord" Type="varchar" MaxLength="20" />
           <Property Name="Användarnamn" Type="nvarchar" MaxLength="50" />
+          <Property Name="Profilbild" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="DataBasModelStoreContainer">
+          <EntitySet Name="Städer" EntityType="Self.Städer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Änder" EntityType="Self.Änder" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -41,10 +44,19 @@ warning 6013: The table/view 'C:\USERS\JOAKI\ONEDRIVE\DOKUMENT\GITHUB\DATINGPROJ
           <Property Name="Ålder" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Lösenord" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Användarnamn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Profilbild" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="DataBasEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Änder" EntityType="Self.Änder" />
+          <EntitySet Name="Städer" EntityType="DataBasModel.Städer" />
         </EntityContainer>
+        <EntityType Name="Städer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Namn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -54,6 +66,7 @@ warning 6013: The table/view 'C:\USERS\JOAKI\ONEDRIVE\DOKUMENT\GITHUB\DATINGPROJ
           <EntitySetMapping Name="Änder">
             <EntityTypeMapping TypeName="DataBasModel.Änder">
               <MappingFragment StoreEntitySet="Änder">
+                <ScalarProperty Name="Profilbild" ColumnName="Profilbild" />
                 <ScalarProperty Name="Användarnamn" ColumnName="Användarnamn" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Förnamn" ColumnName="Förnamn" />
@@ -61,6 +74,14 @@ warning 6013: The table/view 'C:\USERS\JOAKI\ONEDRIVE\DOKUMENT\GITHUB\DATINGPROJ
                 <ScalarProperty Name="Kön" ColumnName="Kön" />
                 <ScalarProperty Name="Ålder" ColumnName="Ålder" />
                 <ScalarProperty Name="Lösenord" ColumnName="Lösenord" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Städer">
+            <EntityTypeMapping TypeName="DataBasModel.Städer">
+              <MappingFragment StoreEntitySet="Städer">
+                <ScalarProperty Name="Namn" ColumnName="Namn" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

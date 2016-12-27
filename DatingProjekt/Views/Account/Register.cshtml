@@ -7,7 +7,6 @@
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
-    @Html.AntiForgeryToken()
     <h4>Create a new account.</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
@@ -57,6 +56,7 @@
         <div class="col-md-offset-2 col-md-10">
             <br />
             <input type="submit" value="Register" onclick="location.href='@Url.Action("Register", "Account")'" />
+            <input type="submit" value="Test" onclick="location.href='@Url.Action("Profile", "Profile")'" />
         </div>
     </div>
 }

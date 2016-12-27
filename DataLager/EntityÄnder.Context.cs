@@ -26,5 +26,6 @@ namespace DataLager
         }
     
         public virtual DbSet<Änder> Änder { get; set; }
+        public virtual DbSet<Städer> Städer { get; set; }
     }
 }

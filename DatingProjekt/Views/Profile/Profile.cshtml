@@ -4,5 +4,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Hej</h2>
+<h2>@Model.Förnamn</h2>
+<p>@Model.Ålder</p>
+<p>@Model.Kön</p>
+<div class="bild">
+<img src="~/Content/Images/@Model.Profilbild" class="img-rounded" alt="hej">
+@using (Html.BeginForm("UserPicture", "Picture", FormMethod.Post, new { enctype = "multipart(form-data" }))
+{
+    <label class="btn btn-info">
+        <input name="file" type="file" style="display: none" />
+        Choose file
+    </label>
+<label class="btn btn-info">
 
+    <input type="submit" value="Change Profile" style="display: none" />
+    Ladda upp bild
+</label>
+}
+    </div>

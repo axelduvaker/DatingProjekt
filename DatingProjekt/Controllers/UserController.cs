@@ -27,15 +27,7 @@ namespace DatingProjekt.Controllers
             });
         }
 
-        //public ActionResult AllaÄnder()
-        //{
-        //    var and = new And();
-
-        //    using (var _userRepository = new UserRepository())
-        //    {
-        //        and.
-        //    }
-        //        }
+        [AllowAnonymous]
         public ActionResult listaAlla()
         {
             var hamtadeAnder = _userRepository.GetAll();
@@ -44,6 +36,11 @@ namespace DatingProjekt.Controllers
                 Ands = _userRepository.GetAll()
             };
             return View(model);
+        }
+
+        public ActionResult Profile()
+        {
+            return View();
         }
     }
 }

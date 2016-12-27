@@ -7,9 +7,11 @@ using DataLager.Repositories;
 using System.Web.Routing;
 using DatingProjekt.Models;
 using System.Web.Security;
+using System.Security.Claims;
 
 namespace DatingProjekt.Controllers
 {
+    
     public class HomeController : Controller
     {
         private readonly UserRepository _userRepository;
@@ -18,7 +20,7 @@ namespace DatingProjekt.Controllers
         {
             _userRepository = new UserRepository();
         }
-       
+       [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
@@ -37,18 +39,21 @@ namespace DatingProjekt.Controllers
 
             return View();
         }
+        [AllowAnonymous]
         public ActionResult Registrera()
         {
             ViewBag.Message = "Your contact page.";
 
             return View();
         }
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult Login()
         {
             return View(new LoginModel());
         }
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Login(LoginModel model)
         {
              //Om felaktig input, returnera view
@@ -56,21 +61,46 @@ namespace DatingProjekt.Controllers
             if (!ModelState.IsValid) return View();
             var Användarnamn = model.Användarnamn;
             var Lösenord = model.Lösenord;
-            
+
             var userexists = _userRepository.UserExists(Användarnamn);
             var lösenexists = _userRepository.PassWordExists(Lösenord);
-            if (userexists && lösenexists)
+            if (!userexists || !lösenexists)
             {
-                //FormsAuthentication.SetAuthCookie(Användarnamn, false);
-                //Vid utloggning: FormsAuthentication.SignOut()
-                return RedirectToAction("listaAlla", "User");
-            }
-            else
-            {
-                model.ErrorMessage = "Felaktigt användarnamn eller lösenord";
+                model.ErrorMessage = "Fel Användarnamn eller lösenord.";
                 return View(model);
             }
 
+            else {
+                var identity = new ClaimsIdentity(new[]
+                {
+                new Claim(ClaimTypes.Name, model.Användarnamn)
+            },
+                "ApplicationCookie");
+                var ctx = Request.GetOwinContext();
+                var authManager = ctx.Authentication;
+                authManager.SignIn(identity);
+                
+
+                    FormsAuthentication.SetAuthCookie(model.Användarnamn, false);
+                return RedirectToAction("Profile", "Profile");
+            }
+            //var inloggande = _userRepository.LoginUser(Användarnamn, Lösenord);
+            //if (inloggande == null)
+            //{
+            //    model.ErrorMessage = "Fel Användarnamn eller lösenord."; 
+            //    return View(model);
+            //}
+            //FormsAuthentication.SetAuthCookie(inloggande.Användarnamn, false);
+            //return RedirectToAction("listaAlla", "User");
+
+        }
+        public ActionResult LoggaUt()
+        {
+            var ctx = Request.GetOwinContext();
+            var authManager = ctx.Authentication;
+
+            authManager.SignOut("ApplicationCookie");
+            return RedirectToAction("Login", "Account");
         }
     }
 }
