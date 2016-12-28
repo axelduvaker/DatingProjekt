@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataLager.Repositories
 {
-    class PictureRepository
+    public class PictureRepository
     {
         public static void UploadPicture(string användarnamn, string pic)
         {

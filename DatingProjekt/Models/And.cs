@@ -14,6 +14,6 @@ namespace DatingProjekt.Models
         public virtual string Ålder { get; set; }
         public virtual string Lösenord { get; set; }
         public virtual string Användarnamn { get; set; }
-        public virtual string Profilbild { get; set; }
+        public string Profilbild { get; set; }
     }
 }
