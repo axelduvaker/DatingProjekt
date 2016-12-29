@@ -1,15 +1,13 @@
 ﻿@model  DatingProjekt.Models.And
 @{
     ViewBag.Title = "Profile";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutInloggad.cshtml";
 }
-
-<h2>@Model.Förnamn</h2>
-<p>@Model.Ålder</p>
-<p>@Model.Kön</p>
+<div class="alla">
 <div class="bild">
     <img src="~/Content/Images/@Model.Profilbild" class="img-rounded" alt="hej">
-    <br />
+    <br /><br />
+    <div class="knappar">
     @using (Html.BeginForm("UserPicture", "Picture", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
         <label class="btn btn-info">
@@ -21,4 +19,11 @@
                     Ladda upp
                 </label>
             }
+        </div>
    </div>
+<div class="ProfilInfo">
+    <p>Namn: @Model.Förnamn @Model.Efternamn</p>
+    <p>Ålder: @Model.Ålder</p>
+    <p>Kön: @Model.Kön</p>
+</div>
+    </div>

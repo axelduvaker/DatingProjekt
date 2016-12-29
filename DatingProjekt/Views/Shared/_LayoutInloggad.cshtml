@@ -1,13 +1,10 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+﻿
+@{
+    ViewBag.Title = "_LayoutInloggad";
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+}
 
-</head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -28,12 +25,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Inställningar", "Settings", "Home")</li>
-                    <li>@Html.ActionLink("Registrera", "Register", "Account")</li>
-                    <li>@Html.ActionLink("Logga in", "Login", "Account")</li>
                     <li>@Html.ActionLink("Profil", "Profile", "Profile")</li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
                     <li>@Html.ActionLink("Logga ut", "LoggaUt", "Account")</li>
                 </ul>
             </div>
@@ -52,3 +47,4 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+

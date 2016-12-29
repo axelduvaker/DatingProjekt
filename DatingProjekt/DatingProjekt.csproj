@@ -255,6 +255,7 @@
     <Content Include="Views\Home\Registrera.cshtml" />
     <Content Include="Views\User\ListaAlla.cshtml" />
     <Content Include="Views\Profile\Profile.cshtml" />
+    <Content Include="Views\Shared\_LayoutInloggad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\And\" />

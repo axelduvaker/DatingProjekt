@@ -57,6 +57,40 @@ html {
       -ms-text-size-adjust: 100%;
 }
 
+.ProfilInfo{
+    clear: both;
+    padding: 30px;
+    margin-top: 50px;
+    float: none;
+    display: inline;
+}
+
+.knappar {
+    display: block;
+    clear: both;
+    float: inherit;
+}
+
+.alla {
+    margin-top: 40px;
+}
+
+.footer {
+    margin-bottom: 0%;
+}
+
+.bild {
+    margin-top: 40px;
+}
+
+.bild > img {
+    clear: both;
+    margin-right: auto;
+    display: block;
+    height: 250px;
+    max-width: 100%;
+}
+
 body {
   margin: 0;
 }
@@ -5703,6 +5737,7 @@ body.modal-open,
   margin-top: 15px;
   text-align: right;
   border-top: 1px solid #e5e5e5;
+  background-color: blue;
 }
 
 .modal-footer:before,
