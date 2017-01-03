@@ -154,8 +154,13 @@ namespace DatingProjekt.Controllers
                 Ålder = model.Ålder,
                 Lösenord = model.Lösenord,
                 Användarnamn = model.Användarnamn,
-                Profilbild = "default.jpg"
-                };
+                Profilbild = "default.jpg",
+                Beskrivning = model.Beskrivning,
+                IntresseradAvHane = model.IntresseradAvHane,
+                IntresseradAvHona = model.IntresseradAvHona,
+                Aktiv = true,
+                Allmän = true
+            };
 
             //    if (result.Succeeded)
             //    {

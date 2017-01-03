@@ -80,8 +80,11 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\PictureRepository.cs" />
+    <Compile Include="Repositories\SökmotorRepository.cs" />
+    <Compile Include="Repositories\UppdateraAndRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
-    <Compile Include="Städer.cs">
+    <Compile Include="Repositories\VänRepository.cs" />
+    <Compile Include="Vänner.cs">
       <DependentUpon>EntityÄnder.tt</DependentUpon>
     </Compile>
     <Compile Include="Änder.cs">

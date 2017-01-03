@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataLager.Repositories
 {
-    public class UserRepository
+    public class UserRepository : IDisposable
     {
         public DataBasEntities Context { get; set; }
 
@@ -48,6 +48,16 @@ namespace DataLager.Repositories
 
         }
 
+        public Änder HamtaAnd(string användarnamn)
+        {
+            return Context.Änder.FirstOrDefault(x => x.Användarnamn.Equals(användarnamn));
+        }
+
+        public Änder GetUserID(int id)
+        {
+            return Context.Änder.FirstOrDefault(x => x.id == id);
+        }
+
         public List<Änder> GetAll()
         {
             //List<Änder> andLista = new List<Änder>();
@@ -60,6 +70,11 @@ namespace DataLager.Repositories
         {
             Context.Änder.Add(and);
             Save();
+        }
+
+        public void Dispose()
+        {
+            Context.Dispose();
         }
     }
 }

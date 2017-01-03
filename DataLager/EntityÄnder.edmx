@@ -5,12 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DataBasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Städer">
+        <EntityType Name="Vänner">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="Frågande" />
+            <PropertyRef Name="Mottagande" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Namn" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Frågande" Type="int" Nullable="false" />
+          <Property Name="Mottagande" Type="int" Nullable="false" />
+          <Property Name="Accepterad" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Änder">
           <Key>
@@ -19,69 +21,155 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Förnamn" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Efternamn" Type="varchar" MaxLength="50" />
-          <Property Name="Kön" Type="varchar" MaxLength="10" />
           <Property Name="Ålder" Type="nvarchar" MaxLength="50" />
           <Property Name="Lösenord" Type="varchar" MaxLength="20" />
           <Property Name="Användarnamn" Type="nvarchar" MaxLength="50" />
           <Property Name="Profilbild" Type="varchar" MaxLength="50" />
+          <Property Name="Beskrivning" Type="nvarchar(max)" />
+          <Property Name="Allmän" Type="bit" Nullable="false" />
+          <Property Name="Aktiv" Type="bit" Nullable="false" />
+          <Property Name="Kön" Type="bit" Nullable="false" />
+          <Property Name="IntresseradAvHane" Type="bit" Nullable="false" />
+          <Property Name="IntresseradAvHona" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK__Vänner__Frågande__4F47C5E3">
+          <End Role="Änder" Type="Self.Änder" Multiplicity="1" />
+          <End Role="Vänner" Type="Self.Vänner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Änder">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Vänner">
+              <PropertyRef Name="Frågande" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vänner__Mottagan__503BEA1C">
+          <End Role="Änder" Type="Self.Änder" Multiplicity="1" />
+          <End Role="Vänner" Type="Self.Vänner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Änder">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Vänner">
+              <PropertyRef Name="Mottagande" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DataBasModelStoreContainer">
-          <EntitySet Name="Städer" EntityType="Self.Städer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vänner" EntityType="Self.Vänner" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Änder" EntityType="Self.Änder" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Vänner__Frågande__4F47C5E3" Association="Self.FK__Vänner__Frågande__4F47C5E3">
+            <End Role="Änder" EntitySet="Änder" />
+            <End Role="Vänner" EntitySet="Vänner" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vänner__Mottagan__503BEA1C" Association="Self.FK__Vänner__Mottagan__503BEA1C">
+            <End Role="Änder" EntitySet="Änder" />
+            <End Role="Vänner" EntitySet="Vänner" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DataBasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DataBasEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Vänner" EntityType="DataBasModel.Vänner" />
+          <EntitySet Name="Änder" EntityType="DataBasModel.Änder" />
+          <AssociationSet Name="FK__Vänner__Frågande__4F47C5E3" Association="DataBasModel.FK__Vänner__Frågande__4F47C5E3">
+            <End Role="Änder" EntitySet="Änder" />
+            <End Role="Vänner" EntitySet="Vänner" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vänner__Mottagan__503BEA1C" Association="DataBasModel.FK__Vänner__Mottagan__503BEA1C">
+            <End Role="Änder" EntitySet="Änder" />
+            <End Role="Vänner" EntitySet="Vänner" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Vänner">
+          <Key>
+            <PropertyRef Name="Frågande" />
+            <PropertyRef Name="Mottagande" />
+          </Key>
+          <Property Name="Frågande" Type="Int32" Nullable="false" />
+          <Property Name="Mottagande" Type="Int32" Nullable="false" />
+          <Property Name="Accepterad" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="FrågandeAnd" Relationship="DataBasModel.FK__Vänner__Frågande__4F47C5E3" FromRole="Vänner" ToRole="Änder" />
+          <NavigationProperty Name="MottagandeAnd" Relationship="DataBasModel.FK__Vänner__Mottagan__503BEA1C" FromRole="Vänner" ToRole="Änder" />
+        </EntityType>
         <EntityType Name="Änder">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Förnamn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Förnamn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Efternamn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Kön" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Ålder" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Lösenord" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Användarnamn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Profilbild" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Beskrivning" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Allmän" Type="Boolean" Nullable="false" />
+          <Property Name="Aktiv" Type="Boolean" Nullable="false" />
+          <Property Name="Kön" Type="Boolean" Nullable="false" />
+          <Property Name="IntresseradAvHane" Type="Boolean" Nullable="false" />
+          <Property Name="IntresseradAvHona" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Vänner" Relationship="DataBasModel.FK__Vänner__Frågande__4F47C5E3" FromRole="Änder" ToRole="Vänner" />
+          <NavigationProperty Name="Vänner1" Relationship="DataBasModel.FK__Vänner__Mottagan__503BEA1C" FromRole="Änder" ToRole="Vänner" />
         </EntityType>
-        <EntityContainer Name="DataBasEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Änder" EntityType="Self.Änder" />
-          <EntitySet Name="Städer" EntityType="DataBasModel.Städer" />
-        </EntityContainer>
-        <EntityType Name="Städer">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Namn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-      </Schema>
+        <Association Name="FK__Vänner__Frågande__4F47C5E3">
+          <End Type="DataBasModel.Änder" Role="Änder" Multiplicity="1" />
+          <End Type="DataBasModel.Vänner" Role="Vänner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Änder">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Vänner">
+              <PropertyRef Name="Frågande" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vänner__Mottagan__503BEA1C">
+          <End Type="DataBasModel.Änder" Role="Änder" Multiplicity="1" />
+          <End Type="DataBasModel.Vänner" Role="Vänner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Änder">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Vänner">
+              <PropertyRef Name="Mottagande" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DataBasModelStoreContainer" CdmEntityContainer="DataBasEntities">
-          <EntitySetMapping Name="Änder">
-            <EntityTypeMapping TypeName="DataBasModel.Änder">
-              <MappingFragment StoreEntitySet="Änder">
-                <ScalarProperty Name="Profilbild" ColumnName="Profilbild" />
-                <ScalarProperty Name="Användarnamn" ColumnName="Användarnamn" />
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="Förnamn" ColumnName="Förnamn" />
-                <ScalarProperty Name="Efternamn" ColumnName="Efternamn" />
-                <ScalarProperty Name="Kön" ColumnName="Kön" />
-                <ScalarProperty Name="Ålder" ColumnName="Ålder" />
-                <ScalarProperty Name="Lösenord" ColumnName="Lösenord" />
+          <EntitySetMapping Name="Vänner">
+            <EntityTypeMapping TypeName="DataBasModel.Vänner">
+              <MappingFragment StoreEntitySet="Vänner">
+                <ScalarProperty Name="Accepterad" ColumnName="Accepterad" />
+                <ScalarProperty Name="Mottagande" ColumnName="Mottagande" />
+                <ScalarProperty Name="Frågande" ColumnName="Frågande" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Städer">
-            <EntityTypeMapping TypeName="DataBasModel.Städer">
-              <MappingFragment StoreEntitySet="Städer">
-                <ScalarProperty Name="Namn" ColumnName="Namn" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
+          <EntitySetMapping Name="Änder">
+            <EntityTypeMapping TypeName="DataBasModel.Änder">
+              <MappingFragment StoreEntitySet="Änder">
+                <ScalarProperty Name="IntresseradAvHona" ColumnName="IntresseradAvHona" />
+                <ScalarProperty Name="IntresseradAvHane" ColumnName="IntresseradAvHane" />
+                <ScalarProperty Name="Kön" ColumnName="Kön" />
+                <ScalarProperty Name="Aktiv" ColumnName="Aktiv" />
+                <ScalarProperty Name="Allmän" ColumnName="Allmän" />
+                <ScalarProperty Name="Beskrivning" ColumnName="Beskrivning" />
+                <ScalarProperty Name="Profilbild" ColumnName="Profilbild" />
+                <ScalarProperty Name="Användarnamn" ColumnName="Användarnamn" />
+                <ScalarProperty Name="Lösenord" ColumnName="Lösenord" />
+                <ScalarProperty Name="Ålder" ColumnName="Ålder" />
+                <ScalarProperty Name="Efternamn" ColumnName="Efternamn" />
+                <ScalarProperty Name="Förnamn" ColumnName="Förnamn" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

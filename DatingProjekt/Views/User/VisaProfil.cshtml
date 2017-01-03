@@ -1,0 +1,20 @@
+﻿@model  DatingProjekt.Models.VisitModel
+@{
+    ViewBag.Title = "Visit Profile";
+    Layout = "~/Views/Shared/_LayoutInloggad.cshtml";
+}
+<div class="thumbnail">
+    <img src="~/Content/Images/@Model.Profilbild" class="img-rounded" alt="hej">
+    <h2>@Model.Förnamn @Model.Efternamn</h2>
+    <p>@Model.Ålder</p>
+    <p>@Model.Användarnamn</p>
+    @if (@Model.Kön)
+    { <p>Kön: Hane</p> }
+    else
+    { <p>Kön: Hona</p> }
+</div>
+@if (!Model.NuvarandeVän)
+{
+    @Html.ActionLink("Skicka vänförfrågan", "SkickaFörfrågan", "User", new { skickande = User.Identity.Name, mottagande = Model.Användarnamn }, new { @class = "btn btn-info" })
+}
+

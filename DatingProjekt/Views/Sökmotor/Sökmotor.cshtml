@@ -1,0 +1,38 @@
+﻿
+@model DatingProjekt.Controllers.SökmotorModel
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_LayoutInloggad.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-md-3" id="registreraID">
+            @Html.LabelFor(x => x.SökText, new { @style = "font-family:'Open sans'" })
+            @Html.TextBoxFor(x => x.SökText, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.SökText)
+        </div>
+    </div>
+    <div class="col-md-3">
+
+        <input class="btn btn-info" type="submit" value="Search" />
+    </div>
+}
+
+@if (Model.HittadAnd != null)
+{
+    <h3>@Model.HittadAnd.Count users found: </h3>
+    <br />
+    foreach (var HittadAnd in Model.HittadAnd)
+    {
+        <div>
+            <img src="~/Content/Images/@HittadAnd.Profilbild" class="img-circle" width="250" height="250" alt="hej">
+            <h5>@HittadAnd.Förnamn @HittadAnd.Efternamn</h5>
+            <h5>Användarnamn: @HittadAnd.Användarnamn</h5>
+            <h5>Ålder: @HittadAnd.Ålder</h5>
+            @Html.ActionLink("Se profil", "visaProfil", "User", new { visitUser = HittadAnd.Användarnamn }, new { @class = "btn btn-info" })
+        </div>
+        <br />
+    }
+}

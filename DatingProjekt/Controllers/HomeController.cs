@@ -33,7 +33,7 @@ namespace DatingProjekt.Controllers
             return View();
         }
 
-        public ActionResult Settings()
+        public ActionResult UppdateraAnd()
         {
             ViewBag.Message = "Dina inställningar.";
 

@@ -175,6 +175,8 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PictureController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\SökmotorController.cs" />
+    <Compile Include="Controllers\UppdateraAndController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -189,6 +191,11 @@
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RegistrationModel.cs" />
+    <Compile Include="Models\SökmotorModel.cs" />
+    <Compile Include="Models\UppdateraAndModel.cs" />
+    <Compile Include="Models\VisitModel.cs" />
+    <Compile Include="Models\VänförfråganModel.cs" />
+    <Compile Include="Models\VänModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -230,7 +237,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Settings.cshtml" />
+    <Content Include="Views\UppdateraAnd\UppdateraAnd.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -252,15 +259,20 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\Registrera.cshtml" />
+    <Content Include="Views\Account\Registrera.cshtml" />
     <Content Include="Views\User\ListaAlla.cshtml" />
     <Content Include="Views\Profile\Profile.cshtml" />
     <Content Include="Views\Shared\_LayoutInloggad.cshtml" />
+    <Content Include="Views\Sökmotor\Sökmotor.cshtml" />
+    <Content Include="Views\User\VisaProfil.cshtml" />
+    <Content Include="Views\User\VänFörfrågan.cshtml" />
+    <Content Include="Views\User\allaVänner.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\And\" />
     <Folder Include="Views\Date\" />
     <Folder Include="Views\Picture\" />
+    <Folder Include="Views\Sokmotor\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Models\fonts\glyphicons-halflings-regular.woff" />

@@ -25,7 +25,7 @@ namespace DataLager
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Vänner> Vänner { get; set; }
         public virtual DbSet<Änder> Änder { get; set; }
-        public virtual DbSet<Städer> Städer { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace DatingProjekt.Models
 
         [Required]
         [Display(Name = "Kön")]
-        public string Kön { get; set; }
+        public bool Kön { get; set; }
 
         [Required]
         [Display(Name = "Ålder")]
@@ -39,5 +39,17 @@ namespace DatingProjekt.Models
         [Compare("Lösenord", ErrorMessage = "The password and confirmation password do not match.")]
         public string BekräftaLösenord { get; set; }
         public string ErrorMessage { get; set; }
+
+        [Display(Name = "Beskrivning")]
+        [StringLength(250, ErrorMessage = "Beskrivningen får inte vara längre än 250 tecken.", MinimumLength = 0)]
+        public string Beskrivning { get; set; }
+
+        [Required(ErrorMessage = "Du måste välja ett alternativ.")]
+        [Display(Name = "Intresserad av hane")]
+        public bool IntresseradAvHane { get; set; }
+
+        [Required(ErrorMessage = "Du måste välja ett alternativ.")]
+        [Display(Name = "Intresserad av hona")]
+        public bool IntresseradAvHona { get; set; }
     }
 }

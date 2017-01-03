@@ -1,0 +1,18 @@
+﻿@model DatingProjekt.Models.VänModel
+@{
+    ViewBag.Title = "allaVänner";
+    Layout = "~/Views/Shared/_LayoutInloggad.cshtml";
+}
+
+<h2>Alla dina nuvarande vänner:</h2>
+
+    @foreach (var and in Model.ListaVänner)
+    {
+        <li id="allaVänner">
+            <label id="namn">
+            @and.Användarnamn
+                </label>
+            </li>
+    }
+
+

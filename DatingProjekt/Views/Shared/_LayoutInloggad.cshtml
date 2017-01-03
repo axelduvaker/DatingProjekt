@@ -25,9 +25,17 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inställningar", "Settings", "Home")</li>
+                    <li>@Html.ActionLink("Uppdatera profil", "UppdateraAnd", "UppdateraAnd")</li>
                     <li>@Html.ActionLink("Profil", "Profile", "Profile")</li>
+                    <li>@Html.ActionLink("Vänförfrågningar", "VänFörfrågan", "User")</li>
+                    <li>@Html.ActionLink("Alla vänner", "allaVänner", "User")</li>
                 </ul>
+                @using (Html.BeginForm("Sökmotor", "Sökmotor", FormMethod.Post, new { @class = "navbar-form navbar-left" }))
+                {
+                    <input name="searchText" type="text" class="form-control" placeholder="Sök användare">
+
+                    <button type="submit" id="searchButton" class="btn btn-default"></button>
+                }
                 <ul class="nav navbar-nav navbar-right">
                     <li>@Html.ActionLink("Logga ut", "LoggaUt", "Account")</li>
                 </ul>

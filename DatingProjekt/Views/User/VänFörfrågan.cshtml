@@ -1,0 +1,19 @@
+﻿@model DatingProjekt.Models.VänförfråganModel
+@{
+    ViewBag.Title = "FriendRequest";
+    Layout = "~/Views/Shared/_LayoutInloggad.cshtml";
+}
+<div class="container" id="friendRequest">
+    @foreach (var friendReq in Model.Förfrågningar)
+    {
+
+        <li>
+            <h3>
+                @friendReq.FrågandeAnd.Användarnamn
+                @Html.ActionLink("Acceptera", "AccepteraFörfrågan", "User", new { mottagande = friendReq.Mottagande, skickande = friendReq.Frågande }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Neka", "NekaFörfrågan", "User", new { mottagande = friendReq.Mottagande, skickande = friendReq.Frågande }, new { @class = "btn btn-danger" })
+            </h3>
+        </li>
+    }
+
+</div>

@@ -14,13 +14,30 @@ namespace DataLager
     
     public partial class Änder
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Änder()
+        {
+            this.Vänner = new HashSet<Vänner>();
+            this.Vänner1 = new HashSet<Vänner>();
+        }
+    
         public int id { get; set; }
         public string Förnamn { get; set; }
         public string Efternamn { get; set; }
-        public string Kön { get; set; }
         public string Ålder { get; set; }
         public string Lösenord { get; set; }
         public string Användarnamn { get; set; }
         public string Profilbild { get; set; }
+        public string Beskrivning { get; set; }
+        public bool Allmän { get; set; }
+        public bool Aktiv { get; set; }
+        public bool Kön { get; set; }
+        public bool IntresseradAvHane { get; set; }
+        public bool IntresseradAvHona { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Vänner> Vänner { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Vänner> Vänner1 { get; set; }
     }
 }

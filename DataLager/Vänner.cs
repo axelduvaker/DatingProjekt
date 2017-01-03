@@ -12,9 +12,13 @@ namespace DataLager
     using System;
     using System.Collections.Generic;
     
-    public partial class Städer
+    public partial class Vänner
     {
-        public int Id { get; set; }
-        public string Namn { get; set; }
+        public int Frågande { get; set; }
+        public int Mottagande { get; set; }
+        public bool Accepterad { get; set; }
+    
+        public virtual Änder FrågandeAnd { get; set; }
+        public virtual Änder MottagandeAnd { get; set; }
     }
 }

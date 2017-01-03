@@ -24,6 +24,9 @@
 <div class="ProfilInfo">
     <p>Namn: @Model.Förnamn @Model.Efternamn</p>
     <p>Ålder: @Model.Ålder</p>
-    <p>Kön: @Model.Kön</p>
+    @if (@Model.Kön)
+    { <p>Kön: Hane</p> }
+    else
+    { <p>Kön: Hona</p> }
 </div>
     </div>
