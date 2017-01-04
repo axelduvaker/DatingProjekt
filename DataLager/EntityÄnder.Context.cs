@@ -27,5 +27,6 @@ namespace DataLager
     
         public virtual DbSet<Vänner> Vänner { get; set; }
         public virtual DbSet<Änder> Änder { get; set; }
+        public virtual DbSet<Meddelanden> Meddelanden { get; set; }
     }
 }

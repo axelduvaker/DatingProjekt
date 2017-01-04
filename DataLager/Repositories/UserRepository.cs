@@ -53,6 +53,13 @@ namespace DataLager.Repositories
             return Context.Änder.FirstOrDefault(x => x.Användarnamn.Equals(användarnamn));
         }
 
+        public string Användarnamn(int id)
+        {
+            var användare = Context.Änder.FirstOrDefault(x => x.id.Equals(id));
+            var användarnamn = användare.Användarnamn;
+                return användarnamn;
+        }
+
         public Änder GetUserID(int id)
         {
             return Context.Änder.FirstOrDefault(x => x.id == id);

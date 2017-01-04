@@ -3,6 +3,11 @@
     ViewBag.Title = "Visit Profile";
     Layout = "~/Views/Shared/_LayoutInloggad.cshtml";
 }
+<head>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.9.2.custom.js"></script>
+</head>
 <div class="thumbnail">
     <img src="~/Content/Images/@Model.Profilbild" class="img-rounded" alt="hej">
     <h2>@Model.Förnamn @Model.Efternamn</h2>
@@ -17,4 +22,64 @@
 {
     @Html.ActionLink("Skicka vänförfrågan", "SkickaFörfrågan", "User", new { skickande = User.Identity.Name, mottagande = Model.Användarnamn }, new { @class = "btn btn-info" })
 }
+
+
+<div class="helaprofilen">
+    <div class="col-md-8 col-centered" id="minEgnaDiv">
+    <div class="well">
+        <h3>Write on my wall! </h3>
+        <br />
+
+        <div class="input-group" id="textAreaMiddle">
+            <textarea class="form-control input-sm chat-input" id="textAreaId" rows="8" cols="200" placeholder="Write your message here..."></textarea>
+
+            <span>
+                <button class="btn btn-info" id="buttonAddPost">Add post</button>
+            </span>
+        </div>
+        <br />
+        <br />
+
+        <div class="well" id="messages">
+
+        </div>
+
+    </div>
+    
+    </div>
+
+    <script type="text/javascript">
+
+
+        $(function () {
+            //Hämtar alla meddelande den valda usern har fått.
+            $.get('../APIControllers/Message/hamtaMeddelanden?and=' + '@Model.Användarnamn', function (data) {
+                $.each(data.Meddelanden, function () {
+                    $('#messages').prepend('<h5>Message: ' + this.Meddelanden + '</h5> <br/>');
+                    $('#messages').prepend('<div class = "well"> <h4>From: ' + this.AvsändarNamn + '</h4>');
+                    $('#messages').append('<br/>');
+                    $('#messages').append('</div>');
+       
+                });
+            });
+
+            //Skapar funktionallitet för att skicka ett meddelande
+            $('#buttonAddPost').click(function () {
+                var messageText = $('#textAreaId').val();
+                var userName = '@Model.Användarnamn';
+                $.post("../APIControllers/Message/PostMessage?recieverUsername=" + userName + "&Message=" + messageText,
+                    function () {
+                        alert("Message sent!");
+                        location.reload();
+                    });
+            });
+
+
+
+
+        });
+    </script>
+    </div>
+
+
 

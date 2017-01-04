@@ -27,7 +27,7 @@ namespace DataLager.Repositories
 
         public void SvaraFörfrågan(int förfrågan, int mottagare, bool svar)
         {
-            var vänförfrågan = Context.Vänner.FirstOrDefault(x => x.Mottagande == mottagare && x.Frågande == förfrågan);
+            var vänförfrågan = Context.Vänner.FirstOrDefault(x => x.Frågande == förfrågan && x.Mottagande == mottagare);
 
             if (svar)
             {
@@ -80,7 +80,7 @@ namespace DataLager.Repositories
         {
 
             var hamtadAnd = from f in Context.Vänner.Include("FrågandeAnd")
-                         where f.Frågande == and.id
+                         where f.Mottagande == and.id
                                && f.Accepterad == false
                          select f;
 

@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DataBasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Meddelanden">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AvsändarID" Type="int" Nullable="false" />
+          <Property Name="MottagarID" Type="int" Nullable="false" />
+          <Property Name="Meddelande" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Datum" Type="datetime" />
+        </EntityType>
         <EntityType Name="Vänner">
           <Key>
             <PropertyRef Name="Frågande" />
@@ -57,6 +67,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DataBasModelStoreContainer">
+          <EntitySet Name="Meddelanden" EntityType="Self.Meddelanden" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vänner" EntityType="Self.Vänner" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Änder" EntityType="Self.Änder" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Vänner__Frågande__4F47C5E3" Association="Self.FK__Vänner__Frågande__4F47C5E3">
@@ -83,6 +94,7 @@
             <End Role="Änder" EntitySet="Änder" />
             <End Role="Vänner" EntitySet="Vänner" />
           </AssociationSet>
+          <EntitySet Name="Meddelanden" EntityType="DataBasModel.Meddelanden" />
         </EntityContainer>
         <EntityType Name="Vänner">
           <Key>
@@ -139,6 +151,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Meddelanden">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AvsändarID" Type="Int32" Nullable="false" />
+          <Property Name="MottagarID" Type="Int32" Nullable="false" />
+          <Property Name="Meddelande" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Datum" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -170,6 +192,17 @@
                 <ScalarProperty Name="Efternamn" ColumnName="Efternamn" />
                 <ScalarProperty Name="Förnamn" ColumnName="Förnamn" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meddelanden">
+            <EntityTypeMapping TypeName="DataBasModel.Meddelanden">
+              <MappingFragment StoreEntitySet="Meddelanden">
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="Meddelande" ColumnName="Meddelande" />
+                <ScalarProperty Name="MottagarID" ColumnName="MottagarID" />
+                <ScalarProperty Name="AvsändarID" ColumnName="AvsändarID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

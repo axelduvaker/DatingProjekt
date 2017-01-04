@@ -78,7 +78,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EntityÄnder.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Meddelanden.cs">
+      <DependentUpon>EntityÄnder.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\MeddelandeRepository.cs" />
     <Compile Include="Repositories\PictureRepository.cs" />
     <Compile Include="Repositories\SökmotorRepository.cs" />
     <Compile Include="Repositories\UppdateraAndRepository.cs" />

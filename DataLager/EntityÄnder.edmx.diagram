@@ -9,6 +9,7 @@
         <EntityTypeShape EntityType="DataBasModel.Änder" Width="1.5" PointX="0.75" PointY="1" />
         <AssociationConnector Association="DataBasModel.FK__Vänner__Frågande__4F47C5E3" />
         <AssociationConnector Association="DataBasModel.FK__Vänner__Mottagan__503BEA1C" />
+        <EntityTypeShape EntityType="DataBasModel.Meddelanden" Width="1.5" PointX="4.875" PointY="2" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
