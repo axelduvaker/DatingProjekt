@@ -13,7 +13,7 @@ namespace DatingProjekt.Models
         public bool Kön { get; set; }
         public virtual string Ålder { get; set; }
         public virtual string Lösenord { get; set; }
-        public virtual string Användarnamn { get; set; }
+        public string Användarnamn { get; set; }
         public string Profilbild { get; set; }
         public bool IntresseradAvHane { get; set; }
         public bool IntresseradAvHona { get; set; }

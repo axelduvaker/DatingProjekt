@@ -24,6 +24,7 @@ namespace DatingProjekt.Controllers
             if (user == null) return View();
             var and = new And
             {
+                Användarnamn = user.Användarnamn,
                 AndId = user.id,
                 Förnamn = user.Förnamn,
                 Efternamn = user.Efternamn,

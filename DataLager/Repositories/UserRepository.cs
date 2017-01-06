@@ -53,6 +53,12 @@ namespace DataLager.Repositories
             return Context.Änder.FirstOrDefault(x => x.Användarnamn.Equals(användarnamn));
         }
 
+        public bool kollaOmUnikt(string namn)
+        {
+            var ejUnikt = HamtaAnd(namn);
+            return ejUnikt == null;
+        }
+
         public string Användarnamn(int id)
         {
             var användare = Context.Änder.FirstOrDefault(x => x.id.Equals(id));

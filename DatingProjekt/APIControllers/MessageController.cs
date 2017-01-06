@@ -47,12 +47,12 @@ namespace DatingProjekt.APIControllers
             return lista;
         }
 
-        [HttpGet]
-        public string Användarnamn(int id)
-        {
-            var userRepo = new DataLager.Repositories.UserRepository();
-            var fullName = userRepo.Användarnamn(id);
-            return fullName;
-        }
+        //[HttpGet]
+        //public string Användarnamn(int id)
+        //{
+        //    var userRepo = new DataLager.Repositories.UserRepository();
+        //    var fullName = userRepo.Användarnamn(id);
+        //    return fullName;
+        //}
     }
 }

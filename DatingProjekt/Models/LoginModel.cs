@@ -8,11 +8,11 @@ namespace DatingProjekt.Models
 {
     public class LoginModel
     {
-        [Required(ErrorMessage = "Användarnamn")]
+        [Required]
         [Display(Name = "Användarnamn")]
         public string Användarnamn { get; set; }
 
-        [Required(ErrorMessage = "Lösenord")]
+        [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Lösenord")]
         public string Lösenord { get; set; }

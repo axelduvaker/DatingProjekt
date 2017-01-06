@@ -7,16 +7,19 @@
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
+    @Html.ValidationSummary(true)
     <div class="form-group">
         @Html.LabelFor(m => m.Användarnamn, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.Användarnamn, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Användarnamn)
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Förnamn, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.Förnamn, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Förnamn)
         </div>
     </div>
     <div class="form-group">
@@ -24,12 +27,14 @@
         @Html.LabelFor(m => m.Efternamn, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.Efternamn, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Efternamn)
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Ålder, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.Ålder, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Ålder)
         </div>
     </div>
     <div class="form-group">
@@ -40,6 +45,7 @@
                 new SelectListItem {Text = "Hane", Value = "true"},
                 new SelectListItem {Text = "Hona", Value = "false"}
             }, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Kön)
         </div>
     </div>
     <div class="form-group">
@@ -51,6 +57,7 @@
            new SelectListItem {Text = "Nej", Value = "false" }
        },
         new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.IntresseradAvHane)
         </div>
     </div>
     <div class="form-group">
@@ -62,24 +69,28 @@
            new SelectListItem {Text = "Nej", Value = "false" }
        },
         new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.IntresseradAvHona)
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Beskrivning, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextAreaFor(m => m.Beskrivning, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Beskrivning)
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Lösenord, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.PasswordFor(m => m.Lösenord, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Lösenord)
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.BekräftaLösenord, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.PasswordFor(m => m.BekräftaLösenord, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.BekräftaLösenord)
         </div>
     </div>
     <div class="form-group">

@@ -159,29 +159,19 @@ namespace DatingProjekt.Controllers
                 IntresseradAvHane = model.IntresseradAvHane,
                 IntresseradAvHona = model.IntresseradAvHona,
                 Aktiv = true,
-                Allmän = true
+                Allmän = true,
             };
-
-            //    if (result.Succeeded)
-            //    {
-            //        await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-
-            //        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-            //        // Send an email with this link
-            //        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-            //        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-            //        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-            //        return RedirectToAction("Index", "Home");
-            //    }
-            //    AddErrors(result);
-            //}
+            if (!_userRepository.kollaOmUnikt(and.Användarnamn))
+            {
+                model.ErrorMessage = "Användarnamnet måste vara unikt!";
+                return View(model);
+            }
 
             // If we got this far, something failed, redisplay form
             FormsAuthentication.SetAuthCookie(model.Användarnamn, false);
             _userRepository.AddAnd(and);
-                return View(model);
-            
+            return RedirectToAction("Login", "Account");
+
         }
 
         [AllowAnonymous]
@@ -199,13 +189,17 @@ namespace DatingProjekt.Controllers
             if (!ModelState.IsValid) return View();
             var Användarnamn = model.Användarnamn;
             var Lösenord = model.Lösenord;
+            var ErrorMessage = model.ErrorMessage;
+
+            var inloggande = _userRepository.LoginUser(Användarnamn, Lösenord);
 
             var userexists = _userRepository.UserExists(Användarnamn);
             var lösenexists = _userRepository.PassWordExists(Lösenord);
+
             if (!userexists || !lösenexists)
             {
-                model.ErrorMessage = "Fel Användarnamn eller lösenord.";
-                return View(model);
+                ModelState.AddModelError("", "Username already exists!");
+                return View();
             }
 
             else
@@ -219,10 +213,23 @@ namespace DatingProjekt.Controllers
                 var authManager = ctx.Authentication;
                 authManager.SignIn(identity);
 
-
                 FormsAuthentication.SetAuthCookie(model.Användarnamn, false);
                 return RedirectToAction("Profile", "Profile");
             }
+        }
+
+        [HttpPost]
+        public JsonResult uniktNamn(Änder and)
+        {
+            if (!_userRepository.kollaOmUnikt(and.Användarnamn))
+            {
+                return Json(false);
+            }
+            else
+            {
+                return Json(true);
+            }
+
         }
 
         public ActionResult LoggaUt()

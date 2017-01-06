@@ -201,6 +201,7 @@
     <Compile Include="Models\AndEntities.cs" />
     <Compile Include="Models\AnderDBInitializer.cs" />
     <Compile Include="Models\AndViewModel.cs" />
+    <Compile Include="Models\AntalFörfrågningarModel.cs" />
     <Compile Include="Models\DatingProjektDB.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -276,7 +277,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Account\Registrera.cshtml" />
     <Content Include="Views\User\ListaAlla.cshtml" />
     <Content Include="Views\Profile\Profile.cshtml" />
     <Content Include="Views\Shared\_LayoutInloggad.cshtml" />
@@ -284,6 +284,7 @@
     <Content Include="Views\User\VisaProfil.cshtml" />
     <Content Include="Views\User\VänFörfrågan.cshtml" />
     <Content Include="Views\User\allaVänner.cshtml" />
+    <Content Include="Views\User\antalVänFörfrågningar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\And\" />

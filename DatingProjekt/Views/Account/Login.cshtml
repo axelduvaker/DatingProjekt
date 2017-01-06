@@ -3,18 +3,22 @@
 @{
     ViewBag.Title = "Log in";
 }
-
+<head>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.9.2.custom.js"></script>
+</head>
 <h2>@ViewBag.Title.</h2>
 <h2>Login</h2>
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
     @Html.LabelFor(x => x.Användarnamn, new { @style = "font-family:'Open sans'" })
-    @Html.TextBoxFor(x => x.Användarnamn, new { @class = "form-control" })
+    @Html.TextBoxFor(x => x.Användarnamn, new { @class = "form-control", @id="användare" })
     @Html.ValidationMessageFor(x => x.Användarnamn)
     <br />
     @Html.LabelFor(x => x.Lösenord, new { @style = "font-family:'Open sans'" })
-    @Html.PasswordFor(x => x.Lösenord, new { @class = "form-control" })
+    @Html.PasswordFor(x => x.Lösenord, new { @class = "form-control", @id="lösenord" })
     @Html.ValidationMessageFor(x => x.Lösenord)
 
     if (Model.ErrorMessage != null)
@@ -26,6 +30,23 @@
     <p>Model.Lösenord</p>
 
     <div class="col-md-3" id="knappLogin">
-        <input class="btn btn-info" type="submit" value="Login" />
+        <input class="btn btn-info" type="submit" value="Login" id="submit" />
     </div>
 }
+
+<script type="text/javascript">
+    $('#submit').click(function()
+    {
+        var data=$("#användare").val();
+        var losen = $('#lösenord').val();
+        if(data.length==0)
+        {
+            alert("Vänligen ange ett användarnamn.");
+            return false;  
+        }
+        else if (losen.length == 0) {
+            alert("Vänligen ange ett lösenord.");
+            return false;
+        }
+    });
+    </script>

@@ -118,5 +118,18 @@ namespace DatingProjekt.Controllers
          
             return RedirectToAction("VänFörfrågan");
         }
+        public PartialViewResult antalVänFörfrågningar()
+        {
+            var model = new AntalFörfrågningarModel();
+            var friendReqRepository = new VänRepository();
+            var user = new Änder();
+
+            using (var userRepo = new UserRepository())
+            {
+                user = userRepo.HamtaAnd(User.Identity.Name);
+            }
+            model.antalFörfrågningar = friendReqRepository.AktivaFörfrågningar(user).Count;
+            return PartialView(model);
+        }
     }
 }

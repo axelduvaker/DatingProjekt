@@ -3,6 +3,11 @@
     ViewBag.Title = "Profile";
     Layout = "~/Views/Shared/_LayoutInloggad.cshtml";
 }
+<head>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.9.2.custom.js"></script>
+</head>
 <div class="alla">
 <div class="bild">
     <img src="~/Content/Images/@Model.Profilbild" class="img-rounded" alt="hej">
@@ -22,6 +27,7 @@
         </div>
    </div>
 <div class="ProfilInfo">
+    <p>Användarnamn: @Model.Användarnamn</p>
     <p>Namn: @Model.Förnamn @Model.Efternamn</p>
     <p>Ålder: @Model.Ålder</p>
     @if (@Model.Kön)
@@ -31,58 +37,28 @@
 </div>
     </div>
 <div class="helaprofilen">
-    <div class="col-md-8 col-centered" id="minEgnaDiv">
-        <div class="well">
-            <h3>Write on my wall! </h3>
+    <div class="col-md-8 col-centered" id="kolumndiv">
+        <div class="meddelandeDiv">
+            <h3>Meddelanden: </h3>
             <br />
-
-            <div class="input-group" id="textAreaMiddle">
-                <textarea class="form-control input-sm chat-input" id="textAreaId" rows="8" cols="200" placeholder="Write your message here..."></textarea>
-
-                <span>
-                    <button class="btn btn-info" id="buttonAddPost">Add post</button>
-                </span>
+            <div class="meddelandeDiv" id="meddelanden">
             </div>
-            <br />
-            <br />
-
-            <div class="well" id="messages">
-
-            </div>
-
         </div>
-
     </div>
 
     <script type="text/javascript">
 
-
         $(function () {
-            //Hämtar alla meddelande den valda usern har fått.
             $.get('../APIControllers/Message/hamtaMeddelanden?and=' + '@Model.Användarnamn', function (data) {
-                $.each(data.Message, function () {
-                    $('#messages').prepend('<h5>Message: ' + this.Message + '</h5> <br/>');
-                    $('#messages').prepend('<div class = "well"> <h4>From: ' + '@Model.Användarnamn' + '</h4>');
-                    $('#messages').append('<br/>');
-                    $('#messages').append('</div>');
+                console.log(data);
+                $.each(data.Meddelanden, function () {
+                    $('#meddelanden').prepend('<h5>Meddelande: ' + this.Meddelanden + '</h5> <br/>');
+                    $('#meddelanden').prepend('<div class = "well"> <h4>Avsändare: ' + this.AvsändarNamn + '</h4>');
+                    $('#meddelanden').append('<br/>');
+                    $('#meddelanden').append('</div>');
 
                 });
             });
-
-            //Skapar funktionallitet för att skicka ett meddelande
-            $('#buttonAddPost').click(function () {
-                var messageText = $('#textAreaId').val();
-                var userName = '@Model.Användarnamn';
-                $.post("../APIControllers/Message/PostMessage?recieverUsername=" + userName + "&Message=" + messageText,
-                    function () {
-                        alert("Message sent!");
-                        location.reload();
-                    });
-            });
-
-
-
-
         });
     </script>
 </div>

@@ -5,7 +5,9 @@
     @Scripts.Render("~/bundles/modernizr")
 }
 <head>
-    
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.9.2.custom.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -31,7 +33,17 @@
                     <li>@Html.ActionLink("Profil", "Profile", "Profile")</li>
                     <li>@Html.ActionLink("Vänförfrågningar", "VänFörfrågan", "User")</li>
                     <li>@Html.ActionLink("Alla vänner", "allaVänner", "User")</li>
-                </ul>
+                    
+                        <a href="@Url.Action("VänFörfrågan", "User")" class="navbar-brand">
+                        Friend requests
+                        <span class="badge">
+                          
+                            @{
+                                Html.RenderAction("antalVänFörfrågningar", "User");
+                            }
+                        </span>
+                        </a>
+</ul>
                 @using (Html.BeginForm("Sökmotor", "Sökmotor", FormMethod.Post, new { @class = "navbar-form navbar-left" }))
                 {
                     <input name="searchText" type="text" class="form-control" placeholder="Sök användare">
