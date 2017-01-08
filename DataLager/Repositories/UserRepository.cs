@@ -15,6 +15,17 @@ namespace DataLager.Repositories
             this.Context = new DataBasEntities();
         }
 
+        public List<Änder> RandomProfiler()
+        {
+            var random = new List<Änder>();
+            var lista = Context.Änder.OrderBy(x => Guid.NewGuid()).ToList();
+            random.Add(lista[0]);
+            random.Add(lista[1]);
+            random.Add(lista[2]);
+            random.Add(lista[3]);
+            return random;
+        }
+
         public void Save()
         {
         Context.SaveChanges();

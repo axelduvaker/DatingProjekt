@@ -23,7 +23,11 @@ namespace DatingProjekt.Controllers
        [AllowAnonymous]
         public ActionResult Index()
         {
-            return View();
+            var model = new HomeModel();
+            {
+                model.RandomProfiler = _userRepository.RandomProfiler();
+            }
+            return View(model);
         }
 
         public ActionResult About()

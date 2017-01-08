@@ -22,6 +22,10 @@
 {
     @Html.ActionLink("Skicka vänförfrågan", "SkickaFörfrågan", "User", new { skickande = User.Identity.Name, mottagande = Model.Användarnamn }, new { @class = "btn btn-info" })
 }
+else
+{
+    <p>Ni är vänner!</p>
+}
 
 
 <div class="helaprofilen">

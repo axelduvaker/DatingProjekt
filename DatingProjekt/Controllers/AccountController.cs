@@ -15,7 +15,6 @@ using System.Web.Security;
 
 namespace DatingProjekt.Controllers
 {
-    
     public class AccountController : Controller
     {
         private readonly UserRepository _userRepository;
@@ -23,6 +22,15 @@ namespace DatingProjekt.Controllers
         public AccountController()
         {
             _userRepository = new UserRepository();
+        }
+
+        public ActionResult Index()
+        {
+            var model = new HomeModel();
+            {
+                model.RandomProfiler = _userRepository.RandomProfiler();
+            }
+            return View(model);
         }
 
         //public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )

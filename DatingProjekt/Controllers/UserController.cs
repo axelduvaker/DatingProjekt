@@ -51,6 +51,8 @@ namespace DatingProjekt.Controllers
             var userRepository = new UserRepository();
             var visitingUser = userRepository.GetUser(visitUser);
 
+            var ärVänner = VänRepository.kollaOmVänner(User.Identity.Name, visitUser);
+
             var visitModel = new VisitModel()
             {
                 Förnamn = visitingUser.Förnamn,
@@ -61,7 +63,8 @@ namespace DatingProjekt.Controllers
                 Beskrivning = visitingUser.Beskrivning,
                 IntresseradAvHane = visitingUser.IntresseradAvHane,
                 IntresseradAvHona = visitingUser.IntresseradAvHona,
-                Profilbild = visitingUser.Profilbild
+                Profilbild = visitingUser.Profilbild,
+                NuvarandeVän = ärVänner
             };
 
             return View(visitModel);

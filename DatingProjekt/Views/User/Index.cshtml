@@ -1,0 +1,27 @@
+﻿@model DatingProjekt.Models.HomeModel
+@{
+    ViewBag.Title = "Home Page User";
+    Layout = "~/Views/Shared/_LayoutInloggad.cshtml";
+}
+<div class="jumbotron">
+    <h1>ANDRA ÄNDER</h1>
+    <p class="lead">Den bästa sidan för dig som saknar nån att bli matad bröd med!</p>
+</div>
+<div class="row">
+    @foreach (var user in Model.RandomProfiler)
+    {
+        <div class="col-md-3 col-sm-6 hero-feature">
+            <div class="thumbnail">
+                <a href="~/Account/Register">
+                    <img src="~/Content/Images/@user.Profilbild" class="img-circle" height="250" width="250" alt="hej">
+                </a>
+                <div class="caption">
+                    <h3>
+                        @user.Förnamn @user.Efternamn
+                    </h3>
+                    @Html.ActionLink("Se Profil", "visaProfil", "User", new { visitUser = user.Användarnamn }, new { @class = "btn btn-info" })
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -15,6 +15,21 @@ namespace DataLager.Repositories
             this.Context = new DataBasEntities();
         }
 
+        public static bool kollaOmVänner(string and1, string and2)
+        {
+            var _userRepository = new UserRepository();
+            var skickande = _userRepository.HamtaAnd(and1).id;
+            var mottagande = _userRepository.HamtaAnd(and2).id;
+
+            using (var db = new DataBasEntities())
+            {
+                var änder = from vän in db.Vänner
+                            where vän.Frågande == skickande && vän.Mottagande == mottagande || vän.Frågande == mottagande && vän.Mottagande == skickande
+                            select vän;
+                return änder.ToList().Count > 0;
+            }
+        }
+
         public void VänFörfrågan(Änder förfrågan, Änder mottagare)
         {
             var and = new Vänner();
@@ -71,11 +86,11 @@ namespace DataLager.Repositories
                             }
                         }
                     }
-                    
                 }
             }
             return lista;
         }
+
         public List<Vänner> AktivaFörfrågningar(Änder and)
         {
 

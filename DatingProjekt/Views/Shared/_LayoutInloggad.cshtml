@@ -31,11 +31,9 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Uppdatera profil", "UppdateraAnd", "UppdateraAnd")</li>
                     <li>@Html.ActionLink("Profil", "Profile", "Profile")</li>
-                    <li>@Html.ActionLink("Vänförfrågningar", "VänFörfrågan", "User")</li>
                     <li>@Html.ActionLink("Alla vänner", "allaVänner", "User")</li>
-                    
                         <a href="@Url.Action("VänFörfrågan", "User")" class="navbar-brand">
-                        Friend requests
+                        Vänförfrågningar
                         <span class="badge">
                           
                             @{
@@ -43,7 +41,7 @@
                             }
                         </span>
                         </a>
-</ul>
+                </ul>
                 @using (Html.BeginForm("Sökmotor", "Sökmotor", FormMethod.Post, new { @class = "navbar-form navbar-left" }))
                 {
                     <input name="searchText" type="text" class="form-control" placeholder="Sök användare">
@@ -60,7 +58,7 @@
         @RenderBody()
         <hr />
         <footer class="footer">
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Andra Änder</p>
         </footer>
     </div>
 

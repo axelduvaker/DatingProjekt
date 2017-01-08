@@ -21,7 +21,7 @@ namespace DatingProjekt.Models
 
         [Required(ErrorMessage = "Fyll i ett användarnamn!")]
         [Display(Name = "Användarnamn")]
-        [RegularExpression(@"^[A-Za-z][A-Za-z0-9]*$", ErrorMessage = "Endast nummer och/eller bokstäver tack!")]
+        [RegularExpression(@"^[A-Za-z][A-Za-z0-9]*$", ErrorMessage = "Endast nummer och/eller bokstäver tack! Inte heller Å, Ä eller Ö.")]
         [Remote("uniktNamn", "Account", HttpMethod = "POST", ErrorMessage = "Detta användarnamn finns redan!")]
         public string Användarnamn { get; set; }
 
@@ -31,18 +31,18 @@ namespace DatingProjekt.Models
 
         [Required(ErrorMessage = "Ange din ålder!")]
         [Display(Name = "Ålder")]
-        [RegularExpression(@"^(0?[1-9]|[1-9][0-9])$", ErrorMessage = "Du msåte vara mellan 1 och 100 år!")]
+        [RegularExpression(@"^(0?[1-9]|[1-9][0-9])$", ErrorMessage = "Du måste vara mellan 1 och 100 år!")]
         public string Ålder { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "Lösenordet måste vara minst sex tecken långt.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Lösenord")]
         public string Lösenord { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Bekräfta lösenord")]
-        [System.Web.Mvc.Compare("Lösenord", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.Web.Mvc.Compare("Lösenord", ErrorMessage = "Lösenorden matchar ej varandra.")]
         public string BekräftaLösenord { get; set; }
         public string ErrorMessage { get; set; }
 

@@ -8,11 +8,13 @@
 
     @foreach (var and in Model.ListaVänner)
     {
-        <li id="allaVänner">
-            <label id="namn">
-            @and.Användarnamn
-                </label>
-            </li>
+        <div>
+            <img src="~/Content/Images/@and.Profilbild" class="img-circle" width="250" height="250" alt="hej">
+            <h5>@and.Förnamn @and.Efternamn</h5>
+            <h5>Användarnamn: @and.Användarnamn</h5>
+            <h5>Ålder: @and.Ålder</h5>
+            @Html.ActionLink("Se profil", "visaProfil", "User", new { visitUser = and.Användarnamn }, new { @class = "btn btn-info" })
+        </div>
     }
 
 

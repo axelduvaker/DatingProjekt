@@ -3,10 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Andra Änder</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -17,35 +16,26 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @if (@User.Identity.IsAuthenticated)
-                {
-                    @Html.ActionLink("Hello " + @User.Identity.Name + "!", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                }
-                else
-                {
-                    @Html.ActionLink("Login", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                }
+                @Html.ActionLink("Andra Änder", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Registrera", "Register", "Account")</li>
-                    <li>@Html.ActionLink("Logga in", "Login", "Account")</li>
-                    <li>@Html.ActionLink("Profil", "Profile", "Profile")</li>
-                    <li>@Html.ActionLink("Logga ut", "LoggaUt", "Account")</li>
+                    <li>@Html.ActionLink(DatingProjekt.Resources.HomeTexts.Registrera, "Register", "Account")</li>
+                    <li>@Html.ActionLink(DatingProjekt.Resources.HomeTexts.LoggaIn, "Login", "Account")</li>
+                    <li>@Html.ActionLink(DatingProjekt.Resources.HomeTexts.Language, "Index", "Language")</li>
+                    <li></li>
                 </ul>
+                @*@Html.Partial("_LoginPartial")*@
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer class="footer">
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Andra Änder</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
