@@ -10,13 +10,36 @@
 </head>
 <div class="thumbnail">
     <img src="~/Content/Images/@Model.Profilbild" class="img-rounded" alt="hej">
-    <h2>@Model.Förnamn @Model.Efternamn</h2>
-    <p>@Model.Ålder</p>
+    <p style="font-weight: bold">Användarnamn:</p>
     <p>@Model.Användarnamn</p>
+    <p style="font-weight: bold">Namn:</p>
+    <p>@Model.Förnamn @Model.Efternamn</p>
+    <p style="font-weight: bold">Ålder:</p>
+    <p>@Model.Ålder</p>
+    <p style="font-weight: bold">Kön:</p>
     @if (@Model.Kön)
-    { <p>Kön: Hane</p> }
+    { <p>Hane</p> }
     else
-    { <p>Kön: Hona</p> }
+    { <p>Hona</p> }
+    <p style="font-weight: bold">Tycker om:</p>
+    @if (@Model.IntresseradAvHane)
+    {
+        <p>Tycker om hanar</p>
+    }
+    else
+    {
+        <p>Tycker inte om hanar</p>
+    }
+    @if (@Model.IntresseradAvHona)
+    {
+        <p>Tycker om honor</p>
+    }
+    else
+    {
+        <p>Tycker inte om honor</p>
+    }
+    <p style="font-weight: bold">Beskrivning: </p>
+    <p>@Model.Beskrivning</p>
 </div>
 @if (!Model.NuvarandeVän)
 {
@@ -33,7 +56,6 @@ else
     <div class="meddelandeDiv">
         <h3>Lämna ett meddelande! </h3>
         <br />
-
         <div class="input-group" id="textAreaMiddle">
             <textarea class="form-control input-sm chat-input" id="textRuta" rows="8" cols="200" placeholder="Lämna ett meddelande!">
             </textarea>
@@ -45,13 +67,9 @@ else
         </div>
         <br />
         <br />
-
         <div class="meddelandeDiv" id="meddelanden">
-
         </div>
-
     </div>
-    
     </div>
 
     <script type="text/javascript">
@@ -63,7 +81,6 @@ else
                     $('#meddelanden').prepend('<div class = "well"> <h4>Avsändare: ' + this.AvsändarNamn + '</h4>');
                     $('#meddelanden').append('<br/>');
                     $('#meddelanden').append('</div>');
-       
                 });
             });
 

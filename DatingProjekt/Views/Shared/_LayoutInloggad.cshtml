@@ -20,7 +20,7 @@
                 </button>
                 @if (@User.Identity.IsAuthenticated)
                 {
-                    @Html.ActionLink("Hello " + @User.Identity.Name + "!", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Hej " + @User.Identity.Name + "!", "Index", "User", new { area = "" }, new { @class = "navbar-brand" })
                 }
                 else
                 {
@@ -41,15 +41,10 @@
                             }
                         </span>
                         </a>
-                </ul>
-                @using (Html.BeginForm("Sökmotor", "Sökmotor", FormMethod.Post, new { @class = "navbar-form navbar-left" }))
-                {
-                    <input name="searchText" type="text" class="form-control" placeholder="Sök användare">
-
-                    <button type="submit" id="searchButton" class="btn btn-default"></button>
-                }
-                <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Logga ut", "LoggaUt", "Account")</li>
+                    <li>@Html.ActionLink("Sök användare", "Sökmotor", "Sökmotor")</li>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Logga ut", "LoggaUt", "Account")</li>
+                    </ul>
                 </ul>
             </div>
         </div>

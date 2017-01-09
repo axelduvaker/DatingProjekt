@@ -397,6 +397,12 @@ img {
 
 .img-rounded {
   border-radius: 6px;
+  
+}
+
+.img-thumbnail{
+ height: auto;
+  max-width: 100%;
 }
 
 .img-thumbnail {

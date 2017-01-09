@@ -24,7 +24,7 @@ namespace DataLager.Repositories
             var HittadAnd = new List<Änder>();
 
             var SökÄnder = from and in Context.Änder
-                           where and.Förnamn.StartsWith(SökAndNamn.Trim())
+                           where and.Användarnamn.StartsWith(SökAndNamn.Trim())
                            && and.Allmän
                            && and.Aktiv == true
                            select and;

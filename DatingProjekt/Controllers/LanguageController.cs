@@ -14,17 +14,25 @@ namespace DatingProjekt.Controllers
         {
             return View();
         }
+        //Den här metoden ändrar språket genom att lagra det i en cookie.
         public ActionResult Change(String LanguageAbbrevation)
         {
-            if (LanguageAbbrevation != null)
+            try
             {
-                Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(LanguageAbbrevation);
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo(LanguageAbbrevation);
+                if (LanguageAbbrevation != null)
+                {
+                    Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(LanguageAbbrevation);
+                    Thread.CurrentThread.CurrentUICulture = new CultureInfo(LanguageAbbrevation);
+                }
+                HttpCookie cookie = new HttpCookie("Language");
+                cookie.Value = LanguageAbbrevation;
+                Response.Cookies.Add(cookie);
+                return View("Index");
             }
-            HttpCookie cookie = new HttpCookie("Language");
-            cookie.Value = LanguageAbbrevation;
-            Response.Cookies.Add(cookie);
-            return View("Index");
+            catch(Exception e)
+            {
+                return View(e);
+            }
         }
     }
 }

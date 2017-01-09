@@ -22,54 +22,70 @@ namespace DatingProjekt.Controllers
         [HttpGet]
         public ActionResult UppdateraAnd()
         {
-            if (!ModelState.IsValid) return View();
-
-            var user = new DataLager.Änder();
-            user = _userRepository.GetUser(User.Identity.Name);
-
-
-            var model = new UppdateraAndModel()
+            //Den här hämtar ut anden.
+            try
             {
-                Förnamn = user.Förnamn,
-                Efternamn = user.Efternamn,
-                Ålder = user.Ålder,
-                Beskrivning = user.Beskrivning,
-                Aktiv = true,
-                Allmän = true,
-                IntresseradAvHane = user.IntresseradAvHane,
-                IntresseradAvHona = user.IntresseradAvHona
-            };
+                if (!ModelState.IsValid) return View();
 
-            return View(model);
+                var user = new DataLager.Änder();
+                user = _userRepository.HamtaAnd(User.Identity.Name);
+
+
+                var model = new UppdateraAndModel()
+                {
+                    Förnamn = user.Förnamn,
+                    Efternamn = user.Efternamn,
+                    Ålder = user.Ålder,
+                    Beskrivning = user.Beskrivning,
+                    Aktiv = true,
+                    Allmän = true,
+                    IntresseradAvHane = user.IntresseradAvHane,
+                    IntresseradAvHona = user.IntresseradAvHona
+                };
+
+                return View(model);
+            }
+            catch(Exception e)
+            {
+                return View(e);
+            }
         }
 
         [HttpPost]
         public ActionResult UppdateraAnd(UppdateraAndModel model)
         {
-            if (!ModelState.IsValid) return View(); //Om felaktig input, returnera view
+            //Den här "gör jobbet" med HttpPost
+            try
+            {
+                if (!ModelState.IsValid) return View(); //Om felaktig input, returnera view
 
 
-            var aktivAnd = new DataLager.Änder();
+                var aktivAnd = new DataLager.Änder();
 
-            aktivAnd.Förnamn = model.Förnamn;
-            aktivAnd.Efternamn = model.Efternamn;
-            aktivAnd.Användarnamn = User.Identity.Name; 
-            aktivAnd.Lösenord = model.Lösenord;
-            aktivAnd.Beskrivning = model.Beskrivning;
-            aktivAnd.Ålder = model.Ålder;
-            aktivAnd.Kön = model.Kön;
-            aktivAnd.IntresseradAvHane = model.IntresseradAvHane;
-            aktivAnd.IntresseradAvHona = model.IntresseradAvHona;
-            aktivAnd.Aktiv = model.Aktiv;
-            aktivAnd.Allmän = model.Allmän;
+                aktivAnd.Förnamn = model.Förnamn;
+                aktivAnd.Efternamn = model.Efternamn;
+                aktivAnd.Användarnamn = User.Identity.Name;
+                aktivAnd.Lösenord = model.Lösenord;
+                aktivAnd.Beskrivning = model.Beskrivning;
+                aktivAnd.Ålder = model.Ålder;
+                aktivAnd.Kön = model.Kön;
+                aktivAnd.IntresseradAvHane = model.IntresseradAvHane;
+                aktivAnd.IntresseradAvHona = model.IntresseradAvHona;
+                aktivAnd.Aktiv = model.Aktiv;
+                aktivAnd.Allmän = model.Allmän;
 
-            var currentUser = User.Identity.Name;
-            
-            var uppdateraAndRepository = new UppdateraAndRepository();
-            uppdateraAndRepository.UpdateAnd(currentUser, aktivAnd);
-            _userRepository.Save();
+                var currentUser = User.Identity.Name;
 
-            return RedirectToAction("Profile", "Profile");
+                var uppdateraAndRepository = new UppdateraAndRepository();
+                uppdateraAndRepository.UpdateAnd(currentUser, aktivAnd);
+                _userRepository.Save();
+
+                return RedirectToAction("Profile", "Profile");
+            }
+            catch (Exception e)
+            {
+                return View(e);
+            }
         }
 
 

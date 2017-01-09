@@ -27,13 +27,36 @@
         </div>
    </div>
 <div class="ProfilInfo">
-    <p>Användarnamn: @Model.Användarnamn</p>
-    <p>Namn: @Model.Förnamn @Model.Efternamn</p>
-    <p>Ålder: @Model.Ålder</p>
+    <p style="font-weight: bold">Användarnamn:</p>
+    <p>@Model.Användarnamn</p>
+    <p style="font-weight: bold">Namn:</p>
+    <p>@Model.Förnamn @Model.Efternamn</p>
+    <p style="font-weight: bold">Ålder:</p>
+    <p>@Model.Ålder</p>
+    <p style="font-weight: bold">Kön:</p>
     @if (@Model.Kön)
-    { <p>Kön: Hane</p> }
+    { <p>Hane</p> }
     else
-    { <p>Kön: Hona</p> }
+    { <p>Hona</p> }
+    <p style="font-weight: bold">Tycker om:</p>
+    @if (@Model.IntresseradAvHane)
+    {
+        <p>Tycker om hanar</p>
+    }
+    else
+    {
+        <p>Tycker inte om hanar</p>
+    }
+    @if (@Model.IntresseradAvHona)
+    {
+        <p>Tycker om honor</p>
+    }
+    else
+    {
+        <p>Tycker inte om honor</p>
+    }
+    <p style="font-weight: bold">Beskrivning: </p>
+    <p>@Model.Beskrivning</p>
 </div>
     </div>
 <div class="helaprofilen">

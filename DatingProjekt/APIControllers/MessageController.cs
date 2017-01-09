@@ -33,26 +33,18 @@ namespace DatingProjekt.APIControllers
             var lista = new MeddelandeListaModel();
             var allaMeddelanden = MeddelandeRepository.allaMeddelanden(_userRepository.HamtaAnd(and));
             var Meddelanden = new List<MeddelandeModel>();
-            foreach (var m in allaMeddelanden)
-            {
-                var model = new MeddelandeModel();
-                model.MeddelandeID = m.Id;
-                model.Meddelanden = m.Meddelande;
-                model.AvsändarID = m.AvsändarID;
-                model.MottagarID = m.MottagarID;
-                model.AvsändarNamn = _userRepository.Användarnamn(model.AvsändarID);
-                Meddelanden.Add(model);
-            }
-            lista.Meddelanden = Meddelanden;
-            return lista;
+                foreach (var m in allaMeddelanden)
+                {
+                    var model = new MeddelandeModel();
+                    model.MeddelandeID = m.Id;
+                    model.Meddelanden = m.Meddelande;
+                    model.AvsändarID = m.AvsändarID;
+                    model.MottagarID = m.MottagarID;
+                    model.AvsändarNamn = _userRepository.Användarnamn(model.AvsändarID);
+                    Meddelanden.Add(model);
+                }
+                lista.Meddelanden = Meddelanden;
+                return lista;
         }
-
-        //[HttpGet]
-        //public string Användarnamn(int id)
-        //{
-        //    var userRepo = new DataLager.Repositories.UserRepository();
-        //    var fullName = userRepo.Användarnamn(id);
-        //    return fullName;
-        //}
     }
 }

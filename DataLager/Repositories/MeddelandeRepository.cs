@@ -14,7 +14,7 @@ namespace DataLager.Repositories
         {
             this.Context = new DataBasEntities();
         }
-        public void nyttMeddelande(Änder and, int mottagarid, string meddelande)
+        public void nyttMeddelande(Änder and, int mottagarid, string meddelande) //Skickar ett meddelande till en användares vägg.
         {
             var avsändarid = and.id;
 
@@ -26,7 +26,7 @@ namespace DataLager.Repositories
             Context.SaveChanges();
 
         }
-        public static List<Meddelanden> allaMeddelanden(Änder and)
+        public static List<Meddelanden> allaMeddelanden(Änder and) //Hämtar alla meddelanden som finns i databasen som mottagaren har fått.
         {
             using (var databas = new DataBasEntities())
             {

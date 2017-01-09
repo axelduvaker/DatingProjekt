@@ -23,7 +23,7 @@ namespace DataLager.Repositories
 
             using (var db = new DataBasEntities())
             {
-                var änder = from vän in db.Vänner
+                var änder = from vän in db.Vänner //Raden under kollar alla kombinationer så att man verkligen ser så att de är vänner.
                             where vän.Frågande == skickande && vän.Mottagande == mottagande || vän.Frågande == mottagande && vän.Mottagande == skickande
                             select vän;
                 return änder.ToList().Count > 0;
@@ -56,7 +56,7 @@ namespace DataLager.Repositories
             }
         }
 
-        public static List<Änder> AllaVänner(Änder änder)
+        public static List<Änder> AllaVänner(Änder änder) //Hämtar alla vänner som har accepterat din vänförfrågan.
         {
             var lista = new List<Änder>();
             using (var context = new DataBasEntities())
@@ -71,7 +71,7 @@ namespace DataLager.Repositories
                     {
                         if (item.Mottagande == änder.id)
                         {
-                            var and = userRep.GetUserID(item.Frågande);
+                            var and = userRep.hamtaAnvändarID(item.Frågande);
                             if (and.Aktiv == true)
                             {
                                 lista.Add(and);
@@ -79,7 +79,7 @@ namespace DataLager.Repositories
                         }
                         else
                         {
-                            var annanand = userRep.GetUserID(item.Mottagande);
+                            var annanand = userRep.hamtaAnvändarID(item.Mottagande);
                             if (annanand.Aktiv == true)
                             {
                                 lista.Add(annanand);
@@ -91,29 +91,15 @@ namespace DataLager.Repositories
             return lista;
         }
 
-        public List<Vänner> AktivaFörfrågningar(Änder and)
+        public List<Vänner> AktivaFörfrågningar(Änder and) 
         {
-
+            //Hämtar förfrågningar via entitetsmodellen med propertyn "FrågandeAnd"
             var hamtadAnd = from f in Context.Vänner.Include("FrågandeAnd")
                          where f.Mottagande == and.id
                                && f.Accepterad == false
                          select f;
 
             return hamtadAnd.ToList();
-        }
-
-        public bool seAktiva(Änder and)
-        {
-            var lista = new List<Vänner>();
-            var hamtad = from vänner in Context.Vänner
-                         where vänner.Frågande == and.id && vänner.Accepterad == false
-                         select vänner;
-            
-            foreach(var sak in hamtad)
-            {
-                lista.Add(sak);
-            }
-            return lista.Count > 0;
         }
     }
 }

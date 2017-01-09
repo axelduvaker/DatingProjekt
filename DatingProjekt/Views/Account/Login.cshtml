@@ -1,7 +1,7 @@
 ﻿@using DatingProjekt.Models
 @model LoginModel
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = "Logga in";
 }
 <head>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
@@ -9,7 +9,6 @@
     <script src="~/Scripts/jquery-ui-1.9.2.custom.js"></script>
 </head>
 <h2>@ViewBag.Title.</h2>
-<h2>Login</h2>
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
@@ -26,8 +25,6 @@
         <p>@Model.ErrorMessage</p>
     }
     <br />
-    <p>Model.Användarnamn</p>
-    <p>Model.Lösenord</p>
 
     <div class="col-md-3" id="knappLogin">
         <input class="btn btn-info" type="submit" value="Login" id="submit" />

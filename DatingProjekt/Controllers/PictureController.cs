@@ -14,18 +14,24 @@ namespace DatingProjekt.Controllers
         [HttpPost]
         public ActionResult UserPicture(HttpPostedFileBase file)
         {
-            if (file != null && file.ContentLength > 0)
-            {
-                var filename = Path.GetFileName(file.FileName);
-                var pathname = Path.Combine(Server.MapPath("~/Content/Images"), filename); //Saves the picture in Images
-                file.SaveAs(pathname);
+            try {
+                if (file != null && file.ContentLength > 0)
+                {
+                    var filename = Path.GetFileName(file.FileName); //Använder Path för att hitta filen.
+                    var pathname = Path.Combine(Server.MapPath("~/Content/Images"), filename); //Sparar filen i mappen Images.
+                    file.SaveAs(pathname);
 
 
-                PictureRepository.UploadPicture(User.Identity.Name, filename);
+                    PictureRepository.UploadPicture(User.Identity.Name, filename);
 
 
+                }
+                return RedirectToAction("Profile", "Profile");
             }
-            return RedirectToAction("Profile", "Profile");
-        }
+            catch(Exception e)
+            {
+                return View(e);
+            }
+            }
     }
 }

@@ -11,12 +11,12 @@ namespace DatingProjekt.Models
     {
         [Required(ErrorMessage = "Fyll i ett förnamn!")]
         [Display(Name = "Förnamn")]
-        [RegularExpression(@"[a-zA-Z \-]+", ErrorMessage = "Endast bokstäver!")]
+        [RegularExpression(@"[a-zåäöA-ZÅÄÖ \-]+", ErrorMessage = "Endast bokstäver!")]
         public string Förnamn { get; set; }
 
         [Required(ErrorMessage = "Fyll i ett efternamn!")]
         [Display(Name = "Efternamn")]
-        [RegularExpression(@"[a-zA-Z \-]+", ErrorMessage = "Endast bokstäver!")]
+        [RegularExpression(@"[a-zåäöA-ZÅÄÖ \-]+", ErrorMessage = "Endast bokstäver!")]
         public string Efternamn { get; set; }
 
         [Required(ErrorMessage = "Fyll i ett användarnamn!")]

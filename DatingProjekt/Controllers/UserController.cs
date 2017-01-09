@@ -20,24 +20,12 @@ namespace DatingProjekt.Controllers
             _vänRepository = new VänRepository();
         }
 
-        public IEnumerable<And> Get()
+        public ActionResult Index() //Hämtar ut exempelanvändare.
         {
-            var users = _userRepository.GetAll();
-            return users.Select(x => new And
+            var model = new HomeModel();
             {
-                AndId = x.id,
-                Förnamn = x.Förnamn
-            });
-        }
-
-        [AllowAnonymous]
-        public ActionResult listaAlla()
-        {
-            var hamtadeAnder = _userRepository.GetAll();
-            var model = new AndViewModel
-            {
-                Ands = _userRepository.GetAll()
-            };
+                model.RandomProfiler = _userRepository.RandomProfiler();
+            }
             return View(model);
         }
 
@@ -48,26 +36,33 @@ namespace DatingProjekt.Controllers
 
         public ActionResult VisaProfil(string visitUser)
         {
-            var userRepository = new UserRepository();
-            var visitingUser = userRepository.GetUser(visitUser);
-
-            var ärVänner = VänRepository.kollaOmVänner(User.Identity.Name, visitUser);
-
-            var visitModel = new VisitModel()
+            try
             {
-                Förnamn = visitingUser.Förnamn,
-                Efternamn = visitingUser.Efternamn,
-                Användarnamn = visitingUser.Användarnamn,
-                Ålder = visitingUser.Ålder,
-                Kön = visitingUser.Kön,
-                Beskrivning = visitingUser.Beskrivning,
-                IntresseradAvHane = visitingUser.IntresseradAvHane,
-                IntresseradAvHona = visitingUser.IntresseradAvHona,
-                Profilbild = visitingUser.Profilbild,
-                NuvarandeVän = ärVänner
-            };
+                var userRepository = new UserRepository();
+                var visitingUser = userRepository.HamtaAnd(visitUser);
 
-            return View(visitModel);
+                var ärVänner = VänRepository.kollaOmVänner(User.Identity.Name, visitUser);
+
+                var visitModel = new VisitModel()
+                {
+                    Förnamn = visitingUser.Förnamn,
+                    Efternamn = visitingUser.Efternamn,
+                    Användarnamn = visitingUser.Användarnamn,
+                    Ålder = visitingUser.Ålder,
+                    Kön = visitingUser.Kön,
+                    Beskrivning = visitingUser.Beskrivning,
+                    IntresseradAvHane = visitingUser.IntresseradAvHane,
+                    IntresseradAvHona = visitingUser.IntresseradAvHona,
+                    Profilbild = visitingUser.Profilbild,
+                    NuvarandeVän = ärVänner
+                };
+
+                return View(visitModel);
+            }
+            catch(Exception e)
+            {
+                return View(e);
+            }
         }
 
         public ActionResult allaVänner()
@@ -79,7 +74,7 @@ namespace DatingProjekt.Controllers
                 ListaVänner = new List<Änder>()
             };
 
-            var allavänner = VänRepository.AllaVänner(_userRepository.GetUser(användarnamn));
+            var allavänner = VänRepository.AllaVänner(_userRepository.HamtaAnd(användarnamn));
 
             foreach (var vänner in allavänner)
             {

@@ -20,7 +20,8 @@ namespace DatingProjekt.Controllers
         {
             _userRepository = new UserRepository();
         }
-       [AllowAnonymous]
+
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var model = new HomeModel();
@@ -43,68 +44,13 @@ namespace DatingProjekt.Controllers
 
             return View();
         }
+
         [AllowAnonymous]
         public ActionResult Registrera()
         {
             ViewBag.Message = "Your contact page.";
 
             return View();
-        }
-        [AllowAnonymous]
-        [HttpGet]
-        public ActionResult Login()
-        {
-            return View(new LoginModel());
-        }
-        [HttpPost]
-        [AllowAnonymous]
-        public ActionResult Login(LoginModel model)
-        {
-             //Om felaktig input, returnera view
-            model.ErrorMessage = null;
-            if (!ModelState.IsValid) return View();
-            var Användarnamn = model.Användarnamn;
-            var Lösenord = model.Lösenord;
-
-            var userexists = _userRepository.UserExists(Användarnamn);
-            var lösenexists = _userRepository.PassWordExists(Lösenord);
-            if (!userexists || !lösenexists)
-            {
-                model.ErrorMessage = "Fel Användarnamn eller lösenord.";
-                return View(model);
-            }
-
-            else {
-                var identity = new ClaimsIdentity(new[]
-                {
-                new Claim(ClaimTypes.Name, model.Användarnamn)
-            },
-                "ApplicationCookie");
-                var ctx = Request.GetOwinContext();
-                var authManager = ctx.Authentication;
-                authManager.SignIn(identity);
-                
-
-                    FormsAuthentication.SetAuthCookie(model.Användarnamn, false);
-                return RedirectToAction("Profile", "Profile");
-            }
-            //var inloggande = _userRepository.LoginUser(Användarnamn, Lösenord);
-            //if (inloggande == null)
-            //{
-            //    model.ErrorMessage = "Fel Användarnamn eller lösenord."; 
-            //    return View(model);
-            //}
-            //FormsAuthentication.SetAuthCookie(inloggande.Användarnamn, false);
-            //return RedirectToAction("listaAlla", "User");
-
-        }
-        public ActionResult LoggaUt()
-        {
-            var ctx = Request.GetOwinContext();
-            var authManager = ctx.Authentication;
-
-            authManager.SignOut("ApplicationCookie");
-            return RedirectToAction("Login", "Account");
         }
     }
 }
